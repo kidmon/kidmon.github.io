@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>워드 임베딩(Word Embedding) - Go High&#39;s Blog</title>
+
+
+    <meta name="description" content="워드 임베딩(Word Embedding)은 최근 자연어 처리(Natural Language Processing) 분야에 있어 거의 필수적으로 사용되고 있다고 할 수 있을 만큼 아주 강력한 방법입니다. 단어를 벡터로 표현함으로써 다양한 연산을 가능하게 하고, 이것을 통해 단어 사이의 유사도를 계산할 수 있습니다.">
+<meta name="keywords" content="NLP,Word Embedding,Word2Vec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="워드 임베딩(Word Embedding)">
+<meta property="og:url" content="https://go-high.github.io/2019/10/20/word-embedding/index.html">
+<meta property="og:site_name" content="Go High&#39;s Blog">
+<meta property="og:description" content="워드 임베딩(Word Embedding)은 최근 자연어 처리(Natural Language Processing) 분야에 있어 거의 필수적으로 사용되고 있다고 할 수 있을 만큼 아주 강력한 방법입니다. 단어를 벡터로 표현함으로써 다양한 연산을 가능하게 하고, 이것을 통해 단어 사이의 유사도를 계산할 수 있습니다.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://go-high.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-10-24T18:15:46.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="워드 임베딩(Word Embedding)">
+<meta name="twitter:description" content="워드 임베딩(Word Embedding)은 최근 자연어 처리(Natural Language Processing) 분야에 있어 거의 필수적으로 사용되고 있다고 할 수 있을 만큼 아주 강력한 방법입니다. 단어를 벡터로 표현함으로써 다양한 연산을 가능하게 하고, 이것을 통해 단어 사이의 유사도를 계산할 수 있습니다.">
+<meta name="twitter:image" content="https://go-high.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/myfavicon3.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script data-ad-client="ca-pub-3102233502381549" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                GO HIGH
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/go-high">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-19T17:22:22.000Z">2019-10-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/NLP/">NLP</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/NLP/Word-Embedding/">Word Embedding</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                워드 임베딩(Word Embedding)
+            
+        </h1>
+        <div class="content">
+            <p>워드 임베딩(Word Embedding)은 최근 자연어 처리(Natural Language Processing) 분야에 있어 거의 필수적으로 사용되고 있다고 할 수 있을 만큼 아주 강력한 방법입니다. 단어를 벡터로 표현함으로써 다양한 연산을 가능하게 하고, 이것을 통해 단어 사이의 유사도를 계산할 수 있습니다.</p>
+<a id="more"></a>
+
+<h2 id="임베딩-Embedding-이란-무엇인가"><a href="#임베딩-Embedding-이란-무엇인가" class="headerlink" title="임베딩(Embedding)이란 무엇인가?"></a>임베딩(Embedding)이란 무엇인가?</h2><p>워드 임베딩에 대해 알아보기 전에 임베딩이 무엇인지 알아보겠습니다. Embed의 사전적 의미는 <strong><em>끼워 넣다, (단단히)박다</em></strong> 라는 뜻입니다.</p>
+<center>
+<br>
+
+<p><img src="https://paper-attachments.dropbox.com/s_451DA3DB5AFFC3A9D76904DC1472434BD18C04577226314D20B4F28ECC2606C1_1570892054223_1.PNG" alt="Embed의 사전적 의미"></p>
+<br>
+</center>
+
+<p>그렇다면 Embedding은 무엇을 어디에 끼워 넣는다는 뜻일까요?? 바로 <code>데이터를 벡터 차원으로</code> 끼워 넣는 것입니다. 컴퓨터의 관점으로 보자면 <code>Discrete 데이터를 Continuous 벡터로 변환</code>시키는 것이죠.</p>
+<blockquote>
+<p>범주형 자료(Discrete Variable)를 연속적인 벡터(Continuous Vector)의 형태로 변환시키는 것.</p>
+</blockquote>
+<p>자연어 처리 분야에서 임베딩은 <code>용어(Term)사이의 유사점을 계산</code>하기 위해 사용됩니다. 예로는 텍스트 분류, 문서 클러스터링, 품사 태깅, 엔티티 인식, 정서 분석 등이 있습니다.</p>
+<h2 id="왜-임베딩을-사용하는가"><a href="#왜-임베딩을-사용하는가" class="headerlink" title="왜 임베딩을 사용하는가?"></a>왜 임베딩을 사용하는가?</h2><p>앞서 범주형 자료를 연속적인 벡터로 만들 수 있다고 말씀드렸는데, 그럼 이렇게 임베딩을 함으로써 얻을 수 있는 것은 무엇일까요? 예를 한 번 들어보겠습니다. 우리는 <code>아메리카노와 카페라떼의 관계</code>를 알고 있습니다. 둘 다 커피의 한 종류로써 에스프레소와 어떤 것을 섞어서 만들었냐의 차이죠. 컴퓨터는 과연 아메리카노와 카페라떼라는 두 단어만 보았을 때 어떤 관계인지 알 수 있을까요?</p>
+<p>잠시 기초적인 부분으로 돌아가서, 컴퓨터는 모든 것을 숫자로 받아들이고 처리합니다. 그렇다면 컴퓨터가 두 단어 사이의 관계를 알 수 있게 하려면 <code>단어를 숫자로 변환</code>해서 알려주는 것이 가장 좋은 방법이겠죠.</p>
+<h2 id="원-핫-인코딩-One-hot-Encoding"><a href="#원-핫-인코딩-One-hot-Encoding" class="headerlink" title="원-핫 인코딩(One-hot Encoding)"></a>원-핫 인코딩(One-hot Encoding)</h2><p>자연어 처리에는 문자를 숫자로 바꾸는 여러 가지 기법들이 있습니다. 그중 단어를 숫자로 표현하는 가장 기본적인 방법이 바로 <code>원-핫 인코딩(One-hot Encoding)</code>입니다.</p>
+<p>원-핫 인코딩은 단어 집합의 크기를 벡터의 차원으로 하며, 표현하고 싶은 단어의 인덱스에 <code>1</code>의 값을 부여하고 다른 인덱스에는 <code>0</code>을 부여하는 단어의 벡터 표현 방식입니다. 이렇게 표현된 벡터를 <code>원-핫 벡터(One-hot Vector)</code>라고 합니다.</p>
+<center>
+<br>
+
+<p><img src="https://paper-attachments.dropbox.com/s_451DA3DB5AFFC3A9D76904DC1472434BD18C04577226314D20B4F28ECC2606C1_1570894212830_2.PNG" alt="커피의 종류가 다섯가지 뿐인 세상…ㅠㅠ"></p>
+<br>
+</center>
+
+<p>커피의 종류가 다섯 가지인 세상이 있다고 가정하고, 원-핫 인코딩 사용해서 아메리카노를 벡터로 표현한다면</p>
+<blockquote>
+<p><strong>아메리카노 = (1, 0, 0, 0, 0)</strong></p>
+</blockquote>
+<p>처럼 나타낼 수 있는 것이죠. 이해가 되셨나요?</p>
+<h2 id="희소-표현-Sparse-Representation"><a href="#희소-표현-Sparse-Representation" class="headerlink" title="희소 표현(Sparse Representation)"></a>희소 표현(Sparse Representation)</h2><p>위에서 보여드린 예시처럼 대부분의 값이 0으로 표현되는 방식을 <code>희소 표현(Sparse Representation)</code>이라 하고, 희소 표현으로 나타낸 벡터를 <code>희소 벡터(Sparse Vector)</code>라고 합니다. 그러나 희소 표현에는 한 가지 문제가 있습니다. 이미 눈치채셨겠지만, 단어가 많아지면 많아질수록 벡터의 차원 또한 커지게 된다는 것입니다.</p>
+<p>다시 한 번 예를 들면, 커피의 종류가 10,000개인 세상에서는 아메리카노를 벡터로 표현하기 위해서</p>
+<blockquote>
+<p><strong>아메리카노 = (1, 0, 0, 0, 0, 0, 0, 0, 0, 0 … <em>9,990개의 0</em> )</strong> [10,000의 차원]</p>
+</blockquote>
+<p>처럼 나타낼 수 있습니다.</p>
+<p>또한, 희소 표현의 특성으로 인해 아메리카노 하나를 표현하기 위해서 10,000개의 차원을 사용한 것도 모자라 그중 9,999개는 0이라는 엄청난 공간적 낭비가 생기는 거죠.</p>
+<h2 id="밀집-표현-Dense-representation"><a href="#밀집-표현-Dense-representation" class="headerlink" title="밀집 표현(Dense representation)"></a>밀집 표현(Dense representation)</h2><p>이러한 희소 표현과 반대되는 표현을, 이를 <code>밀집 표현(Dense Representation)</code>이라 하고, 밀집 표현으로 나타낸 벡터를 <code>밀집 벡터(Dense Vector)</code>라고 합니다.</p>
+<p>밀집 표현은 벡터의 차원을 단어 집합의 크기로 가지지 않습니다. 10,000개의 단어를 표현하는데 100개의 차원을 설정한다면 10,000개의 단어의 벡터 표현을 100개의 차원으로 변환합니다. 또한, 벡터는 더 이상 0과 1만 가지는 것이 아니라 <code>실수</code>를 벡터의 값으로 가지게 됩니다.</p>
+<blockquote>
+<p><strong>아메리카노 = (0.1, 2.4, 1.1, -2.1, 0.7, … <em>95개의 실수</em>)</strong> [100의 차원]</p>
+</blockquote>
+<p>처럼 나타낼 수 있는 것입니다. 그럼 과연 어떤 방법으로 희소 벡터를 밀집 벡터로 나타낼 수 있을까요?</p>
+<h2 id="워드-임베딩-Word-Embedding"><a href="#워드-임베딩-Word-Embedding" class="headerlink" title="워드 임베딩(Word Embedding)"></a>워드 임베딩(Word Embedding)</h2><p>희소 벡터를 밀집 벡터로 변환하는 것을 가능하게 하는 방법이 바로 <code>워드 임베딩(Word Embedding)</code>입니다. <code>인공신경망(Artificial Neural Network)</code>을 이용하여 원-핫 인코딩으로 만들어진 희소 벡터를 학습시켜 밀집 벡터로 변환시키는 것이죠.</p>
+<p>인공신경망을 간단하게 소개드리면, 생물학의 신경망에서 영감을 얻은 통계학적 학습 알고리즘으로 입력계층(Input Layer), 은닉계층(Hidden Layer), 출력계층(Output)으로 이루어진 모델입니다.</p>
+<center>
+<br>
+
+<p><img src="https://paper-attachments.dropbox.com/s_451DA3DB5AFFC3A9D76904DC1472434BD18C04577226314D20B4F28ECC2606C1_1570901653956_3.png" alt="인공신경망 모델"></p>
+<br>
+</center>
+
+<p>워드 임베딩은 <code>문맥 정보</code>만이 언어 항목의 실행 가능한 표현을 구성한다는 아이디어에 기반을 두고 있습니다. 즉, 언어가 맥락적(주변 요소들과의 관계를 통해 특성을 가짐)이라는 가정을 하고 있다는 것입니다.</p>
+<h2 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h2><p>워드임베딩을 구현하는 방법 중 가장 널리 알려지고 많이 사용되는 것이 바로 <code>Word2Vec</code>입니다. Word2Vec이 실제로 어떻게 작동하는지 보고 싶은 분들은 <a href="http://word2vec.kr/search/" target="_blank" rel="noopener">여기</a>에 들어가서 확인하실 수 있습니다. Word2Vec을 한글에 적용하여 확인해볼 수 있도록 구현한 사이트입니다.</p>
+<center>
+<br>
+
+<p><img src="https://paper-attachments.dropbox.com/s_451DA3DB5AFFC3A9D76904DC1472434BD18C04577226314D20B4F28ECC2606C1_1570905454652_4.PNG" alt="벡터로 표현된 단어 간의 연산"></p>
+<br>
+</center>
+
+<p>위의 예제를 보면 알수있다시피, <code>한국+서울-도쿄</code>처럼 단어 간의 연산(덧셈과 뺄셈)을 할 수 있도록 되어있습니다. <code>단어가 벡터로 표현</code>되었기 때문이죠.</p>
+<p>Word2Vec에서 학습 방법으로 사용된 모델은</p>
+<ol>
+<li><strong><em>CBOW(Continuous Bag of Words)</em></strong></li>
+<li><strong><em>Skip-Gram</em></strong></li>
+</ol>
+<p>두 가지입니다. CBOW는 <code>주변 단어(맥락)를 가지고 단어를 예측</code>하고, 반대로 Skip-Gram은 <code>단어를 이용해서 주변 단어(맥락)를 예측</code>하는 모델입니다.</p>
+<h2 id="CBOW"><a href="#CBOW" class="headerlink" title="CBOW"></a>CBOW</h2><p>이번에는 CBOW 모델의 작동 원리를 간단하게 알아보겠습니다. CBOW는 주변 단어(맥락)로 타겟 단어를 예측하는 모델입니다. 주변 단어란 보통 타겟 단어의 앞, 뒤에 있는 몇 단어를 뜻합니다. 이 주변 단어의 범위는 <code>윈도우(Window)</code>라고 부릅니다.</p>
+<p>예를 들어</p>
+<blockquote>
+<p>바닐라라떼는 우유에 에스프레소를 넣고 바닐라 시럽을 뿌려준 커피입니다.</p>
+</blockquote>
+<p>라는 문장이 있다고 해봅시다.</p>
+<p>간단하게 전처리를 하면 이런 형태가 되겠죠.</p>
+<blockquote>
+<p>바닐라라떼 우유 에스프레소 넣다 바닐라 시럽 뿌리다 커피 이다</p>
+</blockquote>
+<p>주변 단어의 범위를 타겟 단어의 앞, 뒤로 한 단어라고 정의하고 윈도우를 만들어 보겠습니다. 아래의 그림과 같이 타겟 단어를 <code>우유</code>라고 한다면 주변 단어는 <code>바닐라라떼</code>와 <code>에스프레소</code>가 되는 것입니다.</p>
+<p>또한 <code>슬라이딩 윈도우(Sliding Window)</code>라는 방식으로 타겟 단어와 주변 단어를 바꿔가면서 학습을 위한 데이터 셋을 만듭니다.</p>
+<center>
+<br>
+
+<p><img src="https://paper-attachments.dropbox.com/s_451DA3DB5AFFC3A9D76904DC1472434BD18C04577226314D20B4F28ECC2606C1_1571812124151_CBOW.png" alt="Sliding Window"></p>
+<br>
+</center>
+
+<p>CBOW는 주변 단어로 타겟 단어를 예측하는 모델이라고 말씀드렸습니다. 그럼 모델의 입력이 주변 단어, 출력이 타겟 단어가 되겠죠. 입력과 출력은 벡터화되어서 벡터 공간에서 표현됩니다. 즉, <code>주변 단어가 비슷하면 타겟 단어의 벡터 표현 역시 비슷해지는 것</code>입니다.</p>
+<p>벡터가 비슷하다는 말은 벡터 공간상에서 가까이 위치한다(거리가 가깝다)는 의미입니다. Word2Vec은 이러한 방식으로 비슷한 맥락의 단어에 비슷한 벡터를 줍니다.</p>
+<center>
+<br>
+
+<p><img src="https://files.slack.com/files-pri/T25783BPY-F6CPDPKHP/screenshot.png?pub_secret=8ce6c11e3b" alt="CBOW"></p>
+<br>
+</center>
+
+<p>이번에는 CBOW의 뉴럴 네트워크 모델을 보겠습니다. 위의 모델에서 입력은 One-hot Encoding된 벡터입니다. 입력, 즉 주변 단어는 <em>V</em>개의 요소 중 하나만 1이고 나머지는 모두 0인 벡터로 표현됩니다. 이렇게 단어의 개수만큼의 차원을 갖는 입력 레이어(Input Layer)가 히든 레이어(Hidden Layer)에서 임베딩 크기 <em>N</em>만큼의 차원의 벡터로 대응됩니다. 마지막으로 출력 레이어(Output Layer)는 다시 단어의 개수만큼의 차원을 가지는 벡터로 변환됩니다. 출력은 타겟 단어이므로 단어의 개수만큼의 경우의 수가 있기 때문입니다.</p>
+<!--
+레이어들 사이의 뉴런들은 서로 모두 연결되어 있습니다. 입력 레이어와 히든 레이어 사이를 연결하는 파라미터들은 행렬 $W_{V \times N}$로 나타낼 수 있고, 입력 레이어에서 히든 레이어로 넘어가는 것은 단순히 행렬 $W$를 곱하는 것과 같습니다. $x$가 입력 벡터라고 하면, 히든 레이어 $h$로 임베딩된 벡터는 $W^{T}x$ 로 나타낼 수 있습니다.
+입력 벡터 $x$는 one-hot encoding된 벡터입니다. $x$의 요소 중 $k$번째 요소만 1이라고 하겠습니다. $x$의 나머지 요소가 모두 0이기 때문에 다른 부분은 모두 무시되고 $W^{T}x$ 의 결과는 $W^{T}$ 의 $k$번째 열, 즉 $W$의 $k$번째 행만 남게됩니다 이 벡터가 해당 단어의 $N$차원 벡터 표현이 되는 것입니다. $W$의 각 행들은 각각 해당하는 단어의 $N$차원의 벡터 표현인 거죠. $W$의 $i$번째 행을 $v^{T}_w_{i}$라고 부르면, 히든 레이어 h는 $v^{T}_{w_{i}}$와 결국 같다는 것을 알 수 있습니다.
+$h=W^{T}x=W^{T}_{k_{i}}:=v^{T}_{w_{i}}$
+입력 레이어에서 히든 레이어로 넘어가면서 우리는 히든 레이어 $h$를 얻었습니다. 히든 레이어에서 출력 레이어로 넘어가기 위해, 우리는 또다른 행렬$W'$가 필요합니다.  $W'$는 $N \times V$의 행렬입니다. 이 파라미터 행렬을 이용해서, 우리는 모든 단어에 대해 출력 레이어의 점수 $u_{j}$를 계산할 수 있습니다. 아래 식에서$v'_{w_{j}}$는 $W'$의 $j$번쩨 열을 뜻합니다. 즉 $u_{j}$ 는 $j$번째 단어에 대한 예측 점수라고 볼 수 있습니다.
+$u_{j}={v'}^{T}_{w_{j}}$
+마지막으로 예측 점수를 각 단어의 확률값으로 바꿔주기 위해 softmax를 사용합니다. 이는 각 단어의 점수에 비례하여 점수를 확률로 만들어주는 방법입니다. 이 방식을 통해 각 단어의 예측 점수가 모두 0 이상이고 모두 더하면 1이 되는 확률값으로 변합니다.
+$p(w_{j}|w_{i})=y_{j}=\frac{exp(u_{j})}{\Sigma^{V}_{j'}exp(u_{j'})}$
+$\frac{a}{exp(u_{j})}$
+여기에서 $y_{j}$는 출력 레이어의 $j$번째 출력값입니다. 위 식들을 조합하면 최종적으로 아래와 같은 식을 얻을 수 있습니다.
+결과적으로 단어 $w$는 $v_{w}$ 와 $v'_{w}$ 이라는 벡터로 표현됩니다.$v_{w}$는 입력 레이어에서 히든 레이어로 넘어가는 행렬 $W$에서 나오며, $v'_{w}$는 히든 레이어에서 출력 레이어로 넘어가는 행렬 $W'$ 에서 나옵니다. $v_{w}$를 단어 $w$의 입력 벡터(Input Vector), $v'_{}$를 단어 $w$의 출력 벡터(Output Vector)라고도 부릅니다.
+-->
+
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스팅에서는 워드 임베딩에 대한 기초와 가장 대표적인 모델인 Word2Vec에 대해서 간단히 알아보았습니다. 자연어를 처리하는 방법에는 임베딩 말고도 규칙 기반 모델이나 확률 모델 등 여러 가지가 있겠습니다만, 최근 트렌드인 인공지능과 기계학습 등을 활용한 연구를 위해서는 거의 필수적이라고 할 수 있을 만큼 중요한 방법이 되었다고 생각합니다.</p>
+<p>부족한 글이지만 저와 마찬가지로 자연어 처리 공부를 처음 시작하고자 하는 분들에게 조금이나마 도움이 될 수 있었으면 좋겠습니다. 끝으로 포스팅을 작성하는데 참고할 수 있도록 좋은 내용을 잘 정리해주신 분들께 감사의 인사를 올리며 링크 출처를 남깁니다.</p>
+<h2 id="참고한-글"><a href="#참고한-글" class="headerlink" title="참고한 글"></a>참고한 글</h2><ol>
+<li><a href="https://dreamgonfly.github.io/machine/learning,/natural/language/processing/2017/08/16/word2vec_explained.html" target="_blank" rel="noopener">쉽게 씌어진 word2vec</a></li>
+<li><a href="https://brunch.co.kr/@geumjaelee/5" target="_blank" rel="noopener">워드 임베딩의 간략한 역사</a></li>
+<li><a href="https://wikidocs.net/22644" target="_blank" rel="noopener">딥러닝을 이용한 자연어 처리 입문</a></li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/NLP/">NLP</a>, <a class="has-link-grey -link" href="/tags/Word-Embedding/">Word Embedding</a>, <a class="has-link-grey -link" href="/tags/Word2Vec/">Word2Vec</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/25/information-retrieval-1/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Information Retrieval - 1</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://go-high.github.io/2019/10/20/word-embedding/';
+        this.page.identifier = '2019/10/20/word-embedding/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'go-high' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#임베딩-Embedding-이란-무엇인가">
+        <span class="has-mr-6">1</span>
+        <span>임베딩(Embedding)이란 무엇인가?</span>
+        </a></li><li>
+        <a class="is-flex" href="#왜-임베딩을-사용하는가">
+        <span class="has-mr-6">2</span>
+        <span>왜 임베딩을 사용하는가?</span>
+        </a></li><li>
+        <a class="is-flex" href="#원-핫-인코딩-One-hot-Encoding">
+        <span class="has-mr-6">3</span>
+        <span>원-핫 인코딩(One-hot Encoding)</span>
+        </a></li><li>
+        <a class="is-flex" href="#희소-표현-Sparse-Representation">
+        <span class="has-mr-6">4</span>
+        <span>희소 표현(Sparse Representation)</span>
+        </a></li><li>
+        <a class="is-flex" href="#밀집-표현-Dense-representation">
+        <span class="has-mr-6">5</span>
+        <span>밀집 표현(Dense representation)</span>
+        </a></li><li>
+        <a class="is-flex" href="#워드-임베딩-Word-Embedding">
+        <span class="has-mr-6">6</span>
+        <span>워드 임베딩(Word Embedding)</span>
+        </a></li><li>
+        <a class="is-flex" href="#Word2Vec">
+        <span class="has-mr-6">7</span>
+        <span>Word2Vec</span>
+        </a></li><li>
+        <a class="is-flex" href="#CBOW">
+        <span class="has-mr-6">8</span>
+        <span>CBOW</span>
+        </a></li><li>
+        <a class="is-flex" href="#마치며">
+        <span class="has-mr-6">9</span>
+        <span>마치며</span>
+        </a></li><li>
+        <a class="is-flex" href="#참고한-글">
+        <span class="has-mr-6">10</span>
+        <span>참고한 글</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/NLP/">
+            <span class="level-start">
+                <span class="level-item">NLP</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/NLP/Information-Retrieval/">
+            <span class="level-start">
+                <span class="level-item">Information Retrieval</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/NLP/Word-Embedding/">
+            <span class="level-start">
+                <span class="level-item">Word Embedding</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/25/information-retrieval-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Information Retrieval - 2">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T17:40:40.000Z">2019-10-25</time></div>
+                    <a href="/2019/10/25/information-retrieval-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Information Retrieval - 2</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Information-Retrieval/">Information Retrieval</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/25/information-retrieval-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Information Retrieval - 1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T17:40:35.000Z">2019-10-25</time></div>
+                    <a href="/2019/10/25/information-retrieval-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Information Retrieval - 1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Information-Retrieval/">Information Retrieval</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/20/word-embedding/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="워드 임베딩(Word Embedding)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-19T17:22:22.000Z">2019-10-20</time></div>
+                    <a href="/2019/10/20/word-embedding/" class="title has-link-black-ter is-size-6 has-text-weight-normal">워드 임베딩(Word Embedding)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Word-Embedding/">Word Embedding</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    GO HIGH
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Go High&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

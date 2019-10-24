@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Information Retrieval - 2 - Go High&#39;s Blog</title>
+
+
+    <meta name="description" content="이 포스팅은 스탠포드 대학교 강의 CS276 Information Retrieval의 참고자료와 KWANGSIK LEE님의 포스팅을 참고하여 개인적인 공부를 위해 정리한 글입니다.">
+<meta name="keywords" content="NLP,Information Retrieval,공부정리">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Information Retrieval - 2">
+<meta property="og:url" content="https://go-high.github.io/2019/10/25/information-retrieval-2/index.html">
+<meta property="og:site_name" content="Go High&#39;s Blog">
+<meta property="og:description" content="이 포스팅은 스탠포드 대학교 강의 CS276 Information Retrieval의 참고자료와 KWANGSIK LEE님의 포스팅을 참고하여 개인적인 공부를 위해 정리한 글입니다.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://go-high.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-10-24T18:03:00.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Information Retrieval - 2">
+<meta name="twitter:description" content="이 포스팅은 스탠포드 대학교 강의 CS276 Information Retrieval의 참고자료와 KWANGSIK LEE님의 포스팅을 참고하여 개인적인 공부를 위해 정리한 글입니다.">
+<meta name="twitter:image" content="https://go-high.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/myfavicon3.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script data-ad-client="ca-pub-3102233502381549" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                GO HIGH
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/go-high">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-24T17:40:40.000Z">2019-10-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/NLP/">NLP</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/NLP/Information-Retrieval/">Information Retrieval</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Information Retrieval - 2
+            
+        </h1>
+        <div class="content">
+            <p>이 포스팅은 스탠포드 대학교 강의 <a href="http://web.stanford.edu/class/cs276/" target="_blank" rel="noopener">CS276 Information Retrieval</a>의 참고자료와 <a href="http://www.kwangsiklee.com/tag/cs276-information-retrieval/page/2/" target="_blank" rel="noopener">KWANGSIK LEE</a>님의 포스팅을 참고하여 개인적인 공부를 위해 정리한 글입니다.</p>
+<a id="more"></a>
+
+<h2 id="Wild-card-Queries"><a href="#Wild-card-Queries" class="headerlink" title="Wild-card Queries"></a>Wild-card Queries</h2><ul>
+<li>*을 이용하여 대상으로 하는 문자열을 포함하는 문서를 검색</li>
+<li>he*llo와 같이 *가 중간에 위치하는 것은 어떻게 처리할 수 있을까?<ul>
+<li>he*와 *llo를 찾아서 교집합을 구한다 → 비용이 크다</li>
+<li>Wild-card를 변형하여 단어의 끝에 위치하게 바꿔서 구한다 → Permuterm Index</li>
+</ul>
+</li>
+</ul>
+<h2 id="Permuterm-Index"><a href="#Permuterm-Index" class="headerlink" title="Permuterm Index"></a>Permuterm Index</h2><ul>
+<li>$로 Term의 끝을 표시</li>
+<li>hello의  Permuterm 결과<table>
+<thead>
+<tr>
+<th>Permuterm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hello$</td>
+</tr>
+<tr>
+<td>ello$h</td>
+</tr>
+<tr>
+<td>llo$he</td>
+</tr>
+<tr>
+<td>lo$hel</td>
+</tr>
+<tr>
+<td>o$hell</td>
+</tr>
+<tr>
+<td>$hello</td>
+</tr>
+</tbody></table>
+</li>
+<li>he<em>llo를 찾으려면 llo$he</em>를 찾으면 된다.</li>
+</ul>
+<h2 id="Spell-Correction"><a href="#Spell-Correction" class="headerlink" title="Spell Correction"></a>Spell Correction</h2><ul>
+<li>두 가지 방법이 있음<ul>
+<li>Isolated Word</li>
+<li>Context Sensitive</li>
+</ul>
+</li>
+</ul>
+<h2 id="Isolated-Word"><a href="#Isolated-Word" class="headerlink" title="Isolated Word"></a>Isolated Word</h2><h3 id="Edit-Distance"><a href="#Edit-Distance" class="headerlink" title="Edit Distance"></a>Edit Distance</h3><ul>
+<li>문자열 S1, S2가 있을 때, 서로 같아지도록 바꿀 수 있는 최소한의 연산 횟수</li>
+<li>dof → dog : 1</li>
+<li>cat → act : 2</li>
+<li>cat → dog : 3</li>
+</ul>
+<h3 id="Weighted-Edit-Distance"><a href="#Weighted-Edit-Distance" class="headerlink" title="Weighted Edit Distance"></a>Weighted Edit Distance</h3><ul>
+<li>Edit Distance 에서 가중치를 적용</li>
+<li>상대적으로 틀리기 쉽거나(키보드가 가까이 있음) 확률이 높은 것에 가중치를 준다.</li>
+</ul>
+<h3 id="N-gram-Overlap"><a href="#N-gram-Overlap" class="headerlink" title="N-gram Overlap"></a>N-gram Overlap</h3><ul>
+<li>쿼리 String의 모든 n-gram을 순회한다.</li>
+<li>n-gram 색인을 통해 사전에 매치되는 n-gram이 있는지 찾는다.</li>
+<li>매치되는 n-gram에 threshold를 둔다.</li>
+</ul>
+<h3 id="Jaccard-Similarity"><a href="#Jaccard-Similarity" class="headerlink" title="Jaccard Similarity"></a>Jaccard Similarity</h3><ul>
+<li>A와 B의 유사도</li>
+<li>A와 B의 크기가 같을 필요는 없다.</li>
+<li>항상 0~1의 값을 가지므로 threshold로 쓰기에 좋다.</li>
+</ul>
+<h2 id="Context-Sensitive"><a href="#Context-Sensitive" class="headerlink" title="Context Sensitive"></a>Context Sensitive</h2><blockquote>
+<p>I flew form Heathrow to Narita.<br>단어에는 오류가 없지만 문맥상의 오류인 form을 고치고 싶다.</p>
+</blockquote>
+<h3 id="Probability-Language-Models"><a href="#Probability-Language-Models" class="headerlink" title="Probability Language Models"></a>Probability Language Models</h3><ul>
+<li>문장에 확률을 할당</li>
+<li>P(about fifteen minutes from) &gt; P(about fifteen minuets from)</li>
+<li>P(A, B, C, D) = P(A)P(B|A)P(C|A, B)P(D|A, B, C)</li>
+</ul>
+<h2 id="Soundex"><a href="#Soundex" class="headerlink" title="Soundex"></a>Soundex</h2><ul>
+<li>Query를 음성이 같은 것끼리 분류하는 것</li>
+<li>Reduced form으로 색인과 검색 수행</li>
+</ul>
+<ol>
+<li>첫 번째 문자를 얻음</li>
+<li>A, E, I, O, U, W, H, Y → 0</li>
+<li>B, F, P, V → 1</li>
+<li>C, G, J, K, Q, S, X, Z → 2</li>
+<li>D, T → 3</li>
+<li>L → 4</li>
+<li>M, N → 5</li>
+<li>R → 6</li>
+<li>연속된 숫자 쌍 제거</li>
+<li>모든 0 제거</li>
+<li>대문자, 숫자, 숫자, 숫자 형태로 변환</li>
+</ol>
+<ul>
+<li>Herman → H655</li>
+<li>High Recall 작업에서 좋음</li>
+</ul>
+<h2 id="Index-Construction"><a href="#Index-Construction" class="headerlink" title="Index Construction"></a>Index Construction</h2><h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><ul>
+<li>검색 엔진의 분산 환경에서 term으로 분할되어있는 색인을 문서로 분할되어 있는 색인으로 변환</li>
+<li>Schema<ul>
+<li>map : input → list(k, v)</li>
+<li>reduce : (k, list(v)) → output</li>
+</ul>
+</li>
+<li>map<ul>
+<li>input : collection</li>
+<li>output : list(termID, docID)</li>
+</ul>
+</li>
+<li>reduce<ul>
+<li>input : (termID1, list(docID)), (termID2, list(docID)), …</li>
+<li>output : posting list1, posting list2, …</li>
+</ul>
+</li>
+</ul>
+<h3 id="MapReduce-Example"><a href="#MapReduce-Example" class="headerlink" title="MapReduce Example"></a>MapReduce Example</h3><ul>
+<li>map<ul>
+<li>input</li>
+<li>d1 : C came, C c’ed</li>
+<li>d2 : C died</li>
+<li>output</li>
+<li>&lt;C, d1&gt;, &lt;came, d1&gt;, &lt;C, d1&gt; &lt;C’ed, d1&gt;, &lt;C, d2&gt;, &lt;died, d2&gt;</li>
+</ul>
+</li>
+<li>reduce<ul>
+<li>input</li>
+<li>(&lt;C,(d1,d2,d1)&gt;, &lt;died,(d2)&gt;, &lt;came,(d1)&gt;, &lt;c’ed,(d1)&gt;)</li>
+<li>output</li>
+<li>(&lt;C,(d1:2,d2:1)&gt;, &lt;died,(d2:1)&gt;, &lt;came,(d1:1)&gt;, &lt;c’ed,(d1:1)&gt;)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Index-Compresssion"><a href="#Index-Compresssion" class="headerlink" title="Index Compresssion"></a>Index Compresssion</h2><ul>
+<li>Dictionary Compression</li>
+<li>Postrings Compression</li>
+</ul>
+<h3 id="Dictionary-Storage-1-—-Fixed-width-entry"><a href="#Dictionary-Storage-1-—-Fixed-width-entry" class="headerlink" title="Dictionary Storage 1 — Fixed width entry"></a>Dictionary Storage 1 — Fixed width entry</h3><p><img src="http://www.kwangsiklee.com/wp-content/uploads/2017/11/searchengine2_0500.png" alt></p>
+<ul>
+<li>40만 term을 관리하기 위해서 11.2MB 소모</li>
+</ul>
+<h3 id="Dictionary-Storage-2-—-Dictionary-as-a-String"><a href="#Dictionary-Storage-2-—-Dictionary-as-a-String" class="headerlink" title="Dictionary Storage 2 — Dictionary-as-a-String"></a>Dictionary Storage 2 — Dictionary-as-a-String</h3><p><img src="http://www.kwangsiklee.com/wp-content/uploads/2017/11/searchengine2_0700.png" alt></p>
+<ul>
+<li>4 바이트 : term frequency</li>
+<li>4 바이트 : term의 포스팅에 대한 포인터</li>
+<li>3 바이트 : term 포인터</li>
+<li>평균 8 바이트 : term당 term string</li>
+<li>400K terms x 19 = 7.6 MB (Fixed width entry 대비 3.6MB 절약)</li>
+</ul>
+<h3 id="Dictionary-Storage-3-—-Blocking"><a href="#Dictionary-Storage-3-—-Blocking" class="headerlink" title="Dictionary Storage 3 — Blocking"></a>Dictionary Storage 3 — Blocking</h3><p><img src="http://www.kwangsiklee.com/wp-content/uploads/2017/11/searchengine2_0800-1.png" alt></p>
+<ul>
+<li>블럭 사이즈가 k = 4라고 가정</li>
+<li>포인터당 3바이트를 Blocking 없이 사용</li>
+</ul>
+<h2 id="Postings-file-entry"><a href="#Postings-file-entry" class="headerlink" title="Postings file entry"></a>Postings file entry</h2><p><img src="http://www.kwangsiklee.com/wp-content/uploads/2017/11/searchengine2_0600.png" alt></p>
+<ul>
+<li>term을 포함하는 문서를 docId가 증가하는 순서로 저장<ul>
+<li>computer: 33, 47, 154, 159, 202, …</li>
+</ul>
+</li>
+<li>개선: 첫 docId만 제대로 기입하고 그다음 docId 부터 값의 차이를 저장<ul>
+<li>computer: 33, 14, 107, 5, 43, …</li>
+<li>최초는 33, 그다음부터 (47-33), (154-47), …</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a href="http://web.stanford.edu/class/cs276/" target="_blank" rel="noopener">Stanford CS276 Information Retrieval</a><br><a href="http://www.kwangsiklee.com/tag/cs276-information-retrieval/page/3/" target="_blank" rel="noopener">KWANGSIK LEE’s log</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Information-Retrieval/">Information Retrieval</a>, <a class="has-link-grey -link" href="/tags/NLP/">NLP</a>, <a class="has-link-grey -link" href="/tags/공부정리/">공부정리</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/25/information-retrieval-1/">
+                <span class="level-item">Information Retrieval - 1</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://go-high.github.io/2019/10/25/information-retrieval-2/';
+        this.page.identifier = '2019/10/25/information-retrieval-2/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'go-high' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Wild-card-Queries">
+        <span class="has-mr-6">1</span>
+        <span>Wild-card Queries</span>
+        </a></li><li>
+        <a class="is-flex" href="#Permuterm-Index">
+        <span class="has-mr-6">2</span>
+        <span>Permuterm Index</span>
+        </a></li><li>
+        <a class="is-flex" href="#Spell-Correction">
+        <span class="has-mr-6">3</span>
+        <span>Spell Correction</span>
+        </a></li><li>
+        <a class="is-flex" href="#Isolated-Word">
+        <span class="has-mr-6">4</span>
+        <span>Isolated Word</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Edit-Distance">
+        <span class="has-mr-6">4.1</span>
+        <span>Edit Distance</span>
+        </a></li><li>
+        <a class="is-flex" href="#Weighted-Edit-Distance">
+        <span class="has-mr-6">4.2</span>
+        <span>Weighted Edit Distance</span>
+        </a></li><li>
+        <a class="is-flex" href="#N-gram-Overlap">
+        <span class="has-mr-6">4.3</span>
+        <span>N-gram Overlap</span>
+        </a></li><li>
+        <a class="is-flex" href="#Jaccard-Similarity">
+        <span class="has-mr-6">4.4</span>
+        <span>Jaccard Similarity</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Context-Sensitive">
+        <span class="has-mr-6">5</span>
+        <span>Context Sensitive</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Probability-Language-Models">
+        <span class="has-mr-6">5.1</span>
+        <span>Probability Language Models</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Soundex">
+        <span class="has-mr-6">6</span>
+        <span>Soundex</span>
+        </a></li><li>
+        <a class="is-flex" href="#Index-Construction">
+        <span class="has-mr-6">7</span>
+        <span>Index Construction</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#MapReduce">
+        <span class="has-mr-6">7.1</span>
+        <span>MapReduce</span>
+        </a></li><li>
+        <a class="is-flex" href="#MapReduce-Example">
+        <span class="has-mr-6">7.2</span>
+        <span>MapReduce Example</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Index-Compresssion">
+        <span class="has-mr-6">8</span>
+        <span>Index Compresssion</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Dictionary-Storage-1-—-Fixed-width-entry">
+        <span class="has-mr-6">8.1</span>
+        <span>Dictionary Storage 1 — Fixed width entry</span>
+        </a></li><li>
+        <a class="is-flex" href="#Dictionary-Storage-2-—-Dictionary-as-a-String">
+        <span class="has-mr-6">8.2</span>
+        <span>Dictionary Storage 2 — Dictionary-as-a-String</span>
+        </a></li><li>
+        <a class="is-flex" href="#Dictionary-Storage-3-—-Blocking">
+        <span class="has-mr-6">8.3</span>
+        <span>Dictionary Storage 3 — Blocking</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Postings-file-entry">
+        <span class="has-mr-6">9</span>
+        <span>Postings file entry</span>
+        </a></li><li>
+        <a class="is-flex" href="#참고">
+        <span class="has-mr-6">10</span>
+        <span>참고</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/NLP/">
+            <span class="level-start">
+                <span class="level-item">NLP</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/NLP/Information-Retrieval/">
+            <span class="level-start">
+                <span class="level-item">Information Retrieval</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/NLP/Word-Embedding/">
+            <span class="level-start">
+                <span class="level-item">Word Embedding</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/25/information-retrieval-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Information Retrieval - 2">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T17:40:40.000Z">2019-10-25</time></div>
+                    <a href="/2019/10/25/information-retrieval-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Information Retrieval - 2</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Information-Retrieval/">Information Retrieval</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/25/information-retrieval-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Information Retrieval - 1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T17:40:35.000Z">2019-10-25</time></div>
+                    <a href="/2019/10/25/information-retrieval-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Information Retrieval - 1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Information-Retrieval/">Information Retrieval</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/20/word-embedding/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="워드 임베딩(Word Embedding)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-19T17:22:22.000Z">2019-10-20</time></div>
+                    <a href="/2019/10/20/word-embedding/" class="title has-link-black-ter is-size-6 has-text-weight-normal">워드 임베딩(Word Embedding)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Word-Embedding/">Word Embedding</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    GO HIGH
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Go High&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
