@@ -19,7 +19,7 @@
 <meta property="og:description" content="이번 포스팅에서는 Windows 10에서 CUDA, Anaconda, Tensorflow를 이용한 딥러닝 환경을 구축하는 과정을 알아보겠습니다.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://go-high.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-11-03T12:02:56.476Z">
+<meta property="og:updated_time" content="2019-11-03T12:11:12.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows 10에서 CUDA를 이용한 Tensorflow-GPU 개발 환경 구축하기">
 <meta name="twitter:description" content="이번 포스팅에서는 Windows 10에서 CUDA, Anaconda, Tensorflow를 이용한 딥러닝 환경을 구축하는 과정을 알아보겠습니다.">
@@ -368,14 +368,14 @@
 </center>
 
 <p>여기까지 하셨으면 잠시 Anaconda로 한 번 갔다 와야 합니다. 아까 말씀드린 것처럼 <code>PyCharm에서 사용할 가상 환경</code>을 만들어야 하거든요.</p>
-<p>Windows 검색을 이용해서 Anaconda Prompt를 실행해주시고, </p>
+<p>Windows 검색을 이용해서 Anaconda Prompt를 실행하고</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n 가상환경이름 -python=버전</span><br></pre></td></tr></table></figure>
 
 <p>처럼 입력해주시면 가상 환경이 만들어집니다.</p>
 <p>저는 tensorflow라는 이름의 Python 3.6.5 버전을 사용하는 가상 환경을 만들기 위해</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n tensorflow -python=3.6.5</span><br></pre></td></tr></table></figure>
 
-<p>라는 커맨드를 입력했습니다.</p>
+<p>커맨드를 입력했습니다.</p>
 <p>그  후 Python과 함께 설치될 다른 라이브러리의 정보가 나오고, [Y]를 입력해주시면 가상 환경 생성이 완료됩니다.</p>
 <center>
 <br>
@@ -388,7 +388,7 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate 가상환경이름(저의 경우에는 tensorflow)</span><br></pre></td></tr></table></figure>
 
 <p>커맨드 입력을 통해 가상 환경을 활성화합니다.</p>
-<p>가상 환경을 활성화하고 난 후,</p>
+<p>가상 환경을 활성화하고 난 후</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu==버전</span><br></pre></td></tr></table></figure>
 
 <p>커맨드 입력을 하시면 드디어 Tensorflow가 설치됩니다!!</p>
@@ -421,19 +421,19 @@
 <br>
 </center>
 
-<p>python이라는 커맨드를 입력해서 Python 인터프리터로 넘어간 후에,</p>
+<p>python이라는 커맨드를 입력해서 Python 인터프리터로 넘어간 후에</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br></pre></td></tr></table></figure>
 
 <p>딱 한 줄만 입력해주시면 설치가 잘 되었는지 확인할 수 있습니다.<br>오류가 안 뜨면 설치가 성공적으로 완료된 겁니다!!</p>
 <center>
 <br>
 
-<p><img src="https://paper-attachments.dropbox.com/s_598BBF9D3854C8BA18AAD1FA32CB0BF349B2A099BA33988E57F1DF8A4C6F0832_1572715619150_image.png" alt="띠용…??"></p>
+<p><img src="https://paper-attachments.dropbox.com/s_598BBF9D3854C8BA18AAD1FA32CB0BF349B2A099BA33988E57F1DF8A4C6F0832_1572715619150_image.png" alt="띠용…?? 오류 메시지인가??"></p>
 <br>
 </center>
 
 <p>아마 깜짝 놀라셨을 수도 있습니다… 뭔 오류 메시지 비슷한 것들이 주르륵 출력되었으니까요.<br>하지만 다행스럽게도 사진과 같은 메시지는 오류가 아닙니다!!!</p>
-<p>위의 오류 메세지는 <code>numpy의 버전으로 인한 경고 메세지</code> 입니다.</p>
+<p>위의 오류 메시지는 <code>numpy의 버전으로 인한 경고 메시지</code> 입니다.</p>
 <center>
 <br>
 
@@ -487,7 +487,7 @@
 <center>
 <br>
 
-<p><img src="https://paper-attachments.dropbox.com/s_598BBF9D3854C8BA18AAD1FA32CB0BF349B2A099BA33988E57F1DF8A4C6F0832_1572716492831_image.png" alt="끝"></p>
+<p><img src="https://paper-attachments.dropbox.com/s_598BBF9D3854C8BA18AAD1FA32CB0BF349B2A099BA33988E57F1DF8A4C6F0832_1572716492831_image.png" alt="드디어 끝"></p>
 <br>
 </center>
 
