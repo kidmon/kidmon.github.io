@@ -19,7 +19,7 @@
 <meta property="og:description" content="이번 포스팅에서는 Windows 10에서 CUDA, Anaconda, Tensorflow를 이용한 딥러닝 환경을 구축하는 과정을 알아보겠습니다.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://go-high.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-11-03T17:53:04.674Z">
+<meta property="og:updated_time" content="2019-11-03T18:06:20.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows 10에서 CUDA를 이용한 Tensorflow-GPU 개발 환경 구축하기">
 <meta name="twitter:description" content="이번 포스팅에서는 Windows 10에서 CUDA, Anaconda, Tensorflow를 이용한 딥러닝 환경을 구축하는 과정을 알아보겠습니다.">
@@ -324,7 +324,7 @@
 <br>
 </center>
 
-<p>위의 체크 박스는 Anaconda를 <code>환경 변수에 자동으로 추가</code>해주는 옵션입니다. Not recommend라고 되어있지만 우리는 기존에 설치해둔 Python이나 Anaconda가 없으니 체크해주시면 되겠습니다.</p>
+<p>위의 체크 박스는 Anaconda를 <code>환경 변수에 자동으로 추가</code>해주는 옵션입니다. Not recommend라고 되어있지만 기존에 설치해둔 Python이나 Anaconda가 없으니 체크해주시면 되겠습니다.</p>
 <center>
 <br>
 
@@ -332,7 +332,7 @@
 <br>
 </center>
 
-<p>마지막으로 Microsoft VSCode를 설치하라는 화면인데 우리는 PyCharm을 쓸 예정이니 여기는 그냥 Skip 해주시면 됩니다.</p>
+<p>마지막으로 Microsoft VSCode를 설치하라는 화면입니다. VSCode대신에 PyCharm을 쓸 예정이니 여기는 그냥 Skip 해주시면 됩니다.</p>
 <p>이제 Anaconda 설치도 끝났습니다.</p>
 <h2 id="PyCharm-설치-및-가상-환경-구축"><a href="#PyCharm-설치-및-가상-환경-구축" class="headerlink" title="PyCharm 설치 및 가상 환경 구축"></a>PyCharm 설치 및 가상 환경 구축</h2><p>진짜 마지막으로 이번에는 Python을 이용한 개발을 더 쉽게 해 주는 IDE,  PyCharm을 설치해봅시다. PyCharm은 <a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noopener">여기</a>에서 다운로드받으시면 됩니다.</p>
 <p>Professional과 Community 버전이 있는데 Professional 버전은 유료로, <code>Community 버전은 무료</code>로 사용할 수 있습니다. (대학생이신 분들은 간단한 등록과정을 통해 Professional 버전을 무료로 사용 가능합니다.) Community 버전으로도 충분히 딥러닝 환경 구축이 가능하니 저는 Community 버전을 사용하겠습니다.</p>
@@ -467,7 +467,10 @@
 <br>
 </center>
 
-<p>[Project Interpreter]로 들어가서 좌측 상단에 [Conda Environment]를 클릭합니다. 그 후 [Existing Environment]를 선택하고 아까 우리가 만들어 놓은 가상 환경을 선택합니다. 저는 tensorflow라는 이름으로 가상 환경을 만들었었죠.</p>
+<p>[Project Interpreter]로 들어가서 좌측 상단에 [Conda Environment]를 클릭합니다. 그 후 [Existing Environment]를 선택하고 아까 만들어 놓은 가상 환경을 선택합니다. 저는 tensorflow라는 이름으로 가상 환경을 만들었었죠.</p>
+<blockquote>
+<p>Anconda를 기본 경로로 설치했을 때, 가상 환경이 저장되는 경로는 <code>C:\Users\사용자이름\AppData\Local\conda\conda\envs</code> 입니다.</p>
+</blockquote>
 <center>
 <br>
 
