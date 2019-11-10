@@ -12,7 +12,7 @@ button,
 input,
 select,
 textarea {
-  font-family: "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
+  font-family: NanumBarunGothic, "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
 }
 @media screen and (min-width: 1280px) {
   .is-1-column .container,
@@ -54,8 +54,8 @@ textarea {
   background: #e7e7e7;
 }
 .card {
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.1);
+  border-radius: 0px;
+  box-shadow: 0 0px 0px rgba(0,0,0,0.05), 0 0 0px rgba(0,0,0,0.1);
 }
 .card + .card,
 .card + .column-right-shadow {
@@ -67,8 +67,8 @@ textarea {
 }
 .card .card-image {
   overflow: hidden;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 img.thumbnail {
   object-fit: cover;
@@ -86,7 +86,7 @@ img.thumbnail {
   color: #003776;
 }
 .navbar-main {
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 0px 0px rgba(0,0,0,0.05);
 }
 .navbar-main .navbar-menu,
 .navbar-main .navbar-start,
@@ -395,16 +395,17 @@ img.thumbnail {
 .content h5 {
   font-size: 1em;
 }
-.content code,
 .content pre {
-  font-size: 0.85em;
-  font-family: "Source Code Pro", monospace, "Microsoft YaHei";
+  font-family: NanumGothicCoding, "Source Code Pro", monospace, "Microsoft YaHei";
+  font-size: 1em;
 }
 .content code {
+  font-family: NanumBarunGothic, "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
+  font-size: 1em;
   color: #003776;
   background: #ebf4ff;
-  padding: 1px;
-  border-radius: 3px;
+  padding: 2px;
+  border-radius: 1px;
 }
 .content blockquote footer strong + cite {
   margin-left: 0.5em;
@@ -453,7 +454,7 @@ figure.highlight figcaption:after {
 }
 figure.highlight figcaption span {
   font-weight: 500;
-  font-family: "Source Code Pro", monospace, "Microsoft YaHei";
+  font-family: NanumGothicCoding, "Source Code Pro", monospace, "Microsoft YaHei";
 }
 figure.highlight figcaption .fold,
 figure.highlight figcaption a {
