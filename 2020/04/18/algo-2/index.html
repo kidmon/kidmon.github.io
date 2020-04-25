@@ -19,7 +19,7 @@
 <meta property="og:description" content="문제블랙잭(https://www.acmicpc.net/problem/2798)  카지노에서 제일 인기 있는 게임 블랙잭의 규칙은 상당히 쉽다. 카드의 합이 21을 넘지 않는 한도 내에서, 카드의 합을 최대한 크게 만드는 게임이다. 블랙잭은 카지노마다 다양한 규정이 있다.한국 최고의 블랙잭 고수 김정인은 새로운 블랙잭 규칙을 만들어 상근, 창영이와 게임하려고">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://kidmon.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2020-04-25T10:04:14.879Z">
+<meta property="og:updated_time" content="2020-04-25T13:25:42.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="알고리즘 공부하기-2(백준 2798번 &#x2F; 블랙잭 &#x2F; 파이썬)">
 <meta name="twitter:description" content="문제블랙잭(https://www.acmicpc.net/problem/2798)  카지노에서 제일 인기 있는 게임 블랙잭의 규칙은 상당히 쉽다. 카드의 합이 21을 넘지 않는 한도 내에서, 카드의 합을 최대한 크게 만드는 게임이다. 블랙잭은 카지노마다 다양한 규정이 있다.한국 최고의 블랙잭 고수 김정인은 새로운 블랙잭 규칙을 만들어 상근, 창영이와 게임하려고">
@@ -178,6 +178,8 @@
 <h2 id="풀이-1"><a href="#풀이-1" class="headerlink" title="풀이 1"></a>풀이 1</h2><h3 id="문제-이해"><a href="#문제-이해" class="headerlink" title="문제 이해"></a>문제 이해</h3><p>기본적인 블랙잭의 게임룰과 같다. 주어진 N개의 카드 중 3장을 골라 더했을 때 M을 넘지 않으면서 가장 큰 수를 만들면 된다.</p>
 <h3 id="제약-조건"><a href="#제약-조건" class="headerlink" title="제약 조건"></a>제약 조건</h3><p>주어진 입력 조건 외에 고려해야 할 조건은 없다.</p>
 <h3 id="해결-과정"><a href="#해결-과정" class="headerlink" title="해결 과정"></a>해결 과정</h3><p>주어진 카드의 수와 목표 점수를 받아서 변수로 지정하고 카드 리스트를 받아서 정수로 변환한다. 카드 리스트를 이용해서 3개의 카드의 합으로 얻을 수 있는 모든 경우의 수를 구하고 그 중 가장 큰 값을 반환하였다. <code>for</code>문 반복 중에 같은 카드가 1회 이상 중복되지 않도록 <code>if j != i, if k != j and k != i</code> 두 가지 조건을 넣어주었다. 너무 단순한 반복 탐색 방법인 것 같아서 아래의 두 번째 풀이 방법을 생각해보았다.</p>
+<hr>
+<p>문제의 출처는 <a href="https://www.acmicpc.net/" target="_blank" rel="noopener">Baekjoon Online Judge</a>이며 포스팅에 있는 코드 중 출처 표기가 없는 것은 직접 작성한 코드입니다.</p>
 
         </div>
         
@@ -201,6 +203,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/04/25/algo-3/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">알고리즘 공부하기-3(백준 2231번 / 분해합 / 파이썬)</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -281,7 +290,7 @@
                 <span class="level-item">Algorithm</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Deep-Learning/">
@@ -334,6 +343,25 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/25/algo-3/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="알고리즘 공부하기-3(백준 2231번 / 분해합 / 파이썬)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-25T13:05:00.000Z">2020-04-25</time></div>
+                    <a href="/2020/04/25/algo-3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">알고리즘 공부하기-3(백준 2231번 / 분해합 / 파이썬)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Algorithm/">Algorithm</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -404,25 +432,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T17:40:40.000Z">2019-10-25</time></div>
                     <a href="/2019/10/25/information-retrieval-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Information Retrieval - 2</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Information-Retrieval/">Information Retrieval</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/25/information-retrieval-1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/image/information-retrieval/thumbnail.png" alt="Information Retrieval - 1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T17:40:35.000Z">2019-10-25</time></div>
-                    <a href="/2019/10/25/information-retrieval-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Information Retrieval - 1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/NLP/">NLP</a> / <a class="has-link-grey -link" href="/categories/NLP/Information-Retrieval/">Information Retrieval</a>
                     </p>
