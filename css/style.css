@@ -1,3 +1,4 @@
+@import url("https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css");
 /* ---------------------------------
  *       Override CSS Framework
  * --------------------------------- */
@@ -12,7 +13,7 @@ button,
 input,
 select,
 textarea {
-  font-family: NanumBarunGothic, "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
+  font-family: "NanumSquareRound", "Helvetica Neue";
 }
 @media screen and (min-width: 1280px) {
   .is-1-column .container,
@@ -396,11 +397,11 @@ img.thumbnail {
   font-size: 1em;
 }
 .content pre {
-  font-family: NanumGothicCoding, "Source Code Pro", monospace, "Microsoft YaHei";
+  font-family: "Source Code Pro";
   font-size: 1em;
 }
 .content code {
-  font-family: NanumBarunGothic, "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
+  font-family: "NanumSquareRound", "Helvetica Neue";
   font-size: 1em;
   color: #003776;
   background: #ebf4ff;
@@ -454,7 +455,7 @@ figure.highlight figcaption:after {
 }
 figure.highlight figcaption span {
   font-weight: 500;
-  font-family: NanumGothicCoding, "Source Code Pro", monospace, "Microsoft YaHei";
+  font-family: "Source Code Pro";
 }
 figure.highlight figcaption .fold,
 figure.highlight figcaption a {
