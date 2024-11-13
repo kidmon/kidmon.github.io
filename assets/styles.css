@@ -56,10 +56,10 @@ h1 {
 }
 
 h2 {
+	font-size: 1.2em;
     color: #333333;
     position: relative;
     line-height: 1.1;
-    font-size: 1.2em;
 }
 
 h2:after {
@@ -73,7 +73,15 @@ h2:after {
     display: block;
 }
 
-h3, h4, h5, h6 {
+h3 {
+	font-size: 1.1em;
+    color: #333333;
+    position: relative;
+    line-height: 1;
+	bottom: -5px;
+}
+
+h4, h5, h6 {
     color: #333333;
     margin: 0 0 10px;
 }
