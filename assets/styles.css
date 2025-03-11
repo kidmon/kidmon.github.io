@@ -195,3 +195,14 @@ b {
     cursor: pointer;
     color: #0C5CAC;
 }
+
+/* =============== LIST-HEADER =============== */
+.list-header {
+	display: flex;
+	align-items: baseline;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	overflow: hidden;
+	padding-right: 15px;
+}
