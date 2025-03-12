@@ -6,11 +6,11 @@ html, body {
     margin: 0px;
     font-family: 'Noto Sans KR', 'Roboto', Helvetica, Arial, sans-serif;
     font-weight: 300;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 header {
-    max-width: 900px;
+    max-width: 850px;
     background-color: #ffffff;
     padding-top: 30px;
     padding-left: 30px;
@@ -22,7 +22,7 @@ header {
 }
 
 section {
-    max-width: 900px;
+    max-width: 850px;
     background-color: #ffffff;
     padding-top: 30px;
     padding-left: 30px;
@@ -34,7 +34,7 @@ section {
 }
 
 footer {
-    max-width: 900px;
+    max-width: 850px;
     text-align: center;
     margin: 0 auto;
     margin-top: -15px;
