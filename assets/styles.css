@@ -10,7 +10,7 @@ html, body {
 }
 
 header {
-    max-width: 900px;
+    max-width: 800px;
     background-color: #ffffff;
     padding-top: 30px;
     padding-left: 30px;
@@ -22,19 +22,19 @@ header {
 }
 
 section {
-    max-width: 900px;
+    max-width: 800px;
     background-color: #ffffff;
     padding-top: 30px;
     padding-left: 30px;
     padding-right: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     border-left: 7px solid #003875; /* #0C5CAC #336699 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 30px auto;
 }
 
 footer {
-    max-width: 900px;
+    max-width: 800px;
     text-align: center;
     margin: 0 auto;
     margin-top: -15px;
