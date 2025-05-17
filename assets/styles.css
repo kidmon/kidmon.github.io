@@ -6,15 +6,15 @@ html, body {
     margin: 0px;
     font-family: 'Noto Sans KR', 'Roboto', Helvetica, Arial, sans-serif;
     font-weight: 300;
-    font-size: 14.5px;
+    font-size: 15px;
 }
 
 header {
     max-width: 800px;
     background-color: #ffffff;
-    padding-top: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
     padding-bottom: 20px;
     border-left: 7px solid #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,9 +25,9 @@ section {
     max-width: 800px;
     background-color: #ffffff;
     padding-top: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 30px;
     border-left: 7px solid #003875; /* #0C5CAC #336699 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 30px auto;
