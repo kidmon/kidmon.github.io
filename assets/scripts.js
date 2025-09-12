@@ -1,4 +1,5 @@
 // for viewport
+/*
 var metas = document.getElementsByTagName('meta');
 var i;
 if (navigator.userAgent.match(/iPhone/i)) {
@@ -16,6 +17,7 @@ function gestureStart() {
     }
   }
 }
+*/
 
 // for typing animation
 const content = "Making AI knowledgeable and trustworthy"
