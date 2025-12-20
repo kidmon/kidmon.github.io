@@ -6,11 +6,11 @@ html, body {
     margin: 0px;
     font-family: 'Noto Sans KR', 'Roboto', Helvetica, Arial, sans-serif;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 14.5px;
 }
 
 header {
-    max-width: 840px;
+    max-width: 880px;
     background-color: #ffffff;
     padding-top: 20px;
     padding-left: 40px;
@@ -22,7 +22,7 @@ header {
 }
 
 section {
-    max-width: 840px;
+    max-width: 880px;
     background-color: #ffffff;
     padding-top: 30px;
     padding-left: 40px;
@@ -34,7 +34,7 @@ section {
 }
 
 footer {
-    max-width: 840px;
+    max-width: 880px;
     text-align: center;
     margin: 0 auto;
     margin-top: -15px;
@@ -42,7 +42,7 @@ footer {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #111111;
+    /* color: #111111; */
     margin: 0 0 20px !important;
     display: flex;
     font-weight: 700;
@@ -50,14 +50,14 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 1.5em;
-    color: #222222;
+    /* color: #222222; */
     margin: 0 0 20px;
     line-height: 1.1;
 }
 
 h2 {
 	font-size: 1.2em;
-    color: #333333;
+    /* color: #333333; */
     position: relative;
     line-height: 1.1;
 }
@@ -75,14 +75,14 @@ h2:after {
 
 h3 {
 	font-size: 1.1em;
-    color: #333333;
+    /* color: #333333; */
     position: relative;
     line-height: 1;
 	bottom: -5px;
 }
 
 h4, h5, h6 {
-    color: #333333;
+    /* color: #333333; */
     margin: 0 0 10px;
 }
 
