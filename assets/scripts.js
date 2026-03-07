@@ -77,3 +77,20 @@ function topFunction() {
 function topFunction() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
+
+// abstract box
+function toggleAbstract(id, btn) {
+  const allBoxes = document.querySelectorAll('.abstract-box');
+  const allAbsBtns = document.querySelectorAll('.abs-btn');
+  const target = document.getElementById(id);
+
+  const isOpen = target && target.classList.contains('show');
+
+  allBoxes.forEach(box => box.classList.remove('show'));
+  allAbsBtns.forEach(button => button.classList.remove('is-active'));
+
+  if (target && !isOpen) {
+    target.classList.add('show');
+    if (btn) btn.classList.add('is-active');
+  }
+}

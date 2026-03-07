@@ -195,3 +195,73 @@ b {
     cursor: pointer;
     color: #0C5CAC;
 }
+
+/* =============== PUBBTN =============== */
+.publication-item {
+    margin-bottom: 20px;
+}
+
+.pub-links {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button.pub-btn,
+a.pub-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 42px;
+    height: 24px;
+    padding: 0 12px;
+
+    border: 1.5px solid #333333;
+    border-radius: 3px;
+    background: #ffffff;
+    color: #333333;
+
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    letter-spacing: 0;
+
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.pub-btn:hover {
+    background: #003875;
+    border-color: #003875;
+    color: #ffffff;
+}
+
+.pub-btn.is-active {
+    background: #003875;
+    border-color: #003875;
+    color: #ffffff;
+}
+
+.abstract-box {
+    display: none;
+    margin-top: 5px;
+    padding: 12px 14px;
+    background: #f6f8fc;
+    color: #111111;
+    line-height: 1.65;
+    font-size: 0.9rem;
+    border-radius: 3px;
+}
+
+.abstract-box.show {
+    display: block;
+}
