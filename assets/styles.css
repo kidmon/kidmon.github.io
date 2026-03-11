@@ -268,18 +268,19 @@ a.pub-btn {
 
 /* =============== VSTMAP =============== */
 #visitor-map {
-	margin-top: 40px;
-	margin-bottom: 20px;
+	margin-top: 50px;
+	margin-bottom: 30px;
 	text-align: center;
 }
 
-#visitor-map h2 {
-	margin-bottom: 16px;
+#visitor-map #clustrmaps {
+	display: inline-block;
+	transform: scale(0.8);
+	transform-origin: top center;
 }
 
-#visitor-map iframe,
-#visitor-map img,
-#visitor-map canvas,
-#visitor-map div {
-	max-width: 100%;
+@media (max-width: 768px) {
+	#visitor-map #clustrmaps {
+		transform: scale(0.6);
+	}
 }
