@@ -272,15 +272,3 @@ a.pub-btn {
 	margin-bottom: 30px;
 	text-align: center;
 }
-
-#visitor-map #clustrmaps {
-	display: inline-block;
-	transform: scale(0.8);
-	transform-origin: top center;
-}
-
-@media (max-width: 768px) {
-	#visitor-map #clustrmaps {
-		transform: scale(0.6);
-	}
-}
