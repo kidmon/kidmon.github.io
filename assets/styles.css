@@ -22,6 +22,7 @@
     --emphasis: #2c333d;        /* 강조 보조 (venue, 버튼 글자, 사이드바 직함) */
     --btn-bg: #ffffff;          /* Paper 버튼 배경 */
     --accent: #e64980;          /* 로즈 포인트 (News 날짜) */
+    --ok: #2b8a3e;              /* 초록 (사이드바 상태 배지) */
     --tag-bg: rgba(0, 71, 171, 0.09);          /* 논문 태그 배경 */
     --hover-tint: rgba(0, 71, 171, 0.06);      /* 항목 호버·카드 배경 (반투명 틴트) */
     --selection: rgba(0, 71, 171, 0.12);      /* 텍스트 드래그 선택 색 */
@@ -40,6 +41,7 @@
         --emphasis: #cdd3da;
         --btn-bg: #363e49;
         --accent: #faa2c1;
+        --ok: #69db7c;
         --tag-bg: rgba(107, 159, 232, 0.16);
         --hover-tint: rgba(107, 159, 232, 0.08);
         --selection: rgba(107, 159, 232, 0.25);
@@ -58,6 +60,7 @@
     --emphasis: #cdd3da;
     --btn-bg: #363e49;
     --accent: #faa2c1;
+    --ok: #69db7c;
     --tag-bg: rgba(107, 159, 232, 0.16);
     --hover-tint: rgba(107, 159, 232, 0.08);
     --selection: rgba(107, 159, 232, 0.25);
@@ -259,6 +262,49 @@ section > div {
     line-height: 1.55;
     color: var(--secondary);
     margin-top: 7px;
+}
+
+/* 상태 배지 — 구직 중 표시 (초록 점 + 알약형, 취업 후 HTML 한 줄만 지우면 됨) */
+#sidebar-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78em;
+    font-weight: 500;
+    color: var(--ok);
+    background-color: color-mix(in srgb, var(--ok) 10%, transparent);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 14px;
+}
+
+#sidebar-status .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--ok);
+    animation: status-pulse 2.4s ease-out infinite;
+}
+
+@keyframes status-pulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 40%, transparent); }
+    70%  { box-shadow: 0 0 0 6px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* 위치 (mono, 이메일과 같은 톤) */
+#sidebar-location {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    color: var(--secondary);
+    margin-bottom: 2px;
+}
+
+#sidebar-location i {
+    font-size: 0.85em;
+    color: var(--soft);
+    margin-right: 7px;
 }
 
 /* 이메일 (mono, 여러 줄) */
