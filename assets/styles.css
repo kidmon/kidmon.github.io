@@ -463,14 +463,15 @@ section > div {
     padding: 0.5px 6px 1.5px;
     margin-right: 7px;
     vertical-align: 1px;
-    animation: new-badge-pulse 2.4s ease-out infinite;
+    animation: new-badge-pulse 2s ease-out infinite;
 }
 
 /* spread만 키우는 box-shadow라 배지 모양 그대로 링이 퍼짐. 레이아웃 영향 없음.
-   본문 텍스트 바로 옆이라 사이드바 배지보다는 약하게(5px, 35%), 70%→100%는 쉬는 구간 */
+   본문 텍스트 바로 옆이라 사이드바 배지보다는 약하게(5px, 35%).
+   2초 주기 중 1.5초 동안 퍼지고(75%), 나머지 0.5초는 쉬는 구간 */
 @keyframes new-badge-pulse {
     0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent); }
-    70%  { box-shadow: 0 0 0 5px transparent; }
+    75%  { box-shadow: 0 0 0 5px transparent; }
     100% { box-shadow: 0 0 0 0 transparent; }
 }
 
