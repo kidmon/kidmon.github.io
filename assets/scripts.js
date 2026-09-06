@@ -27,17 +27,6 @@ themeToggle.addEventListener('click', () => {
   setTimeout(() => document.documentElement.classList.remove('theme-anim'), 300);
 });
 
-// Google Scholar 인용 지표 — GitHub Actions가 매주 갱신하는 assets/scholar.json을 읽어 표시
-fetch('assets/scholar.json')
-  .then(r => (r.ok ? r.json() : Promise.reject()))
-  .then(d => {
-    if (!d || d.citations == null) return;
-    document.getElementById('scholar-citations').textContent = d.citations;
-    document.getElementById('scholar-hindex').textContent = d.hIndex;
-    document.getElementById('sidebar-scholar').hidden = false;
-  })
-  .catch(() => {});  // 파일이 없거나 파싱 실패 시 지표 줄을 그냥 숨긴 채로 둠
-
 // sidebar nav scrollspy
 const navLinks = document.querySelectorAll('#sidebar-nav a');
 const navSections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href')));
