@@ -17,9 +17,9 @@
     --primary: #0047ab;         /* 메인 색 (코발트): 링크, 논문 태그, 내비 활성 */
     --fill: #0047ab;            /* 흰 글자를 얹는 채움색 (버튼/아이콘 호버 배경) */
     --line: #e4e8ee;            /* 구분선 (제목 밑줄, 푸터 선, 내비 구분선) */
-    --soft: #98a2ae;            /* 연한 UI (버튼 테두리, 푸터 글자, 월 라벨) */
-    --secondary: #5a6472;       /* 보조 텍스트 (메타데이터, 저자, 지역 등) */
-    --emphasis: #2c333d;        /* 강조 보조 (venue, 버튼 글자, 사이드바 직함) */
+    --soft: #6b7683;            /* 연한 UI (버튼 테두리, 푸터 글자, 월 라벨) */
+    --secondary: #414a57;       /* 보조 텍스트 (메타데이터, 저자, 지역 등) */
+    --emphasis: #1f242c;        /* 강조 보조 (venue, 버튼 글자, 사이드바 직함) */
     --btn-bg: #ffffff;          /* Paper 버튼 배경 */
     --accent: #e64980;          /* 로즈 포인트 (News 타임라인, New 배지) */
     --tag-bg: rgba(0, 71, 171, 0.09);          /* 논문 태그 배경 */
@@ -35,9 +35,9 @@
         --primary: #6b9fe8;
         --fill: #0047ab;
         --line: #48505d;
-        --soft: #6d7684;
-        --secondary: #99a2ad;
-        --emphasis: #cdd3da;
+        --soft: #7a8492;
+        --secondary: #a5adb8;
+        --emphasis: #d2d8df;
         --btn-bg: #363e49;
         --accent: #faa2c1;
         --tag-bg: rgba(107, 159, 232, 0.16);
@@ -53,9 +53,9 @@
     --primary: #6b9fe8;
     --fill: #0047ab;
     --line: #48505d;
-    --soft: #6d7684;
-    --secondary: #99a2ad;
-    --emphasis: #cdd3da;
+    --soft: #7a8492;
+    --secondary: #a5adb8;
+    --emphasis: #d2d8df;
     --btn-bg: #363e49;
     --accent: #faa2c1;
     --tag-bg: rgba(107, 159, 232, 0.16);
@@ -551,7 +551,7 @@ section > div {
 #publications .sparse-list,
 #patents .sparse-list {
     position: relative;
-    padding: 12px 12px 12px 58px;   /* 왼쪽 58px = 태그 자리 */
+    padding: 12px 12px 7px 58px;    /* 왼쪽 58px = 태그 자리. 아래 7px + .pub-links margin 5px = 버튼 아래 12px */
     margin-left: -10px;             /* 태그를 컬럼 라인에 맞추기 위한 보정 */
     margin-right: -10px;
     border-radius: 8px;
@@ -684,7 +684,7 @@ section > div {
     padding-top: 16px;
     border-top: 1px solid var(--line);
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.85em;
+    font-size: 0.75em;
     color: var(--soft);
 }
 
