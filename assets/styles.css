@@ -270,6 +270,28 @@ section > div {
     margin-bottom: 14px;
 }
 
+/* Scholar 인용 지표 (이메일과 같은 mono 톤, scripts.js가 scholar.json을 읽어 채움) */
+#sidebar-scholar {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.82em;
+    color: var(--secondary);
+    margin-bottom: 14px;
+}
+
+#sidebar-scholar a {
+    color: inherit;
+}
+
+#sidebar-scholar .scholar-num {
+    color: var(--emphasis);
+    font-weight: 500;
+}
+
+#sidebar-scholar .scholar-sep {
+    color: var(--soft);
+    margin: 0 3px;
+}
+
 /* 소셜 아이콘 줄 (Scholar / LinkedIn / GitHub / CV / 다크모드 토글) */
 #sidebar-social {
     display: flex;
