@@ -674,9 +674,9 @@ section > div {
         margin-top: 5px;
     }
 
-    /* 이메일·위치를 한 묶음(7px)으로 붙이고, 아이콘 줄과의 간격은 #sidebar-social이 담당 */
+    /* 이메일·위치 간격은 다른 단락과 같은 10px, 아이콘 줄과의 간격은 #sidebar-social이 담당 */
     #sidebar-email {
-        margin-bottom: 7px;
+        margin-bottom: 10px;
     }
 
     #sidebar-location {
