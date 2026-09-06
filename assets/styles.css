@@ -298,7 +298,7 @@ section > div {
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.9em;
     color: var(--secondary);
-    margin-bottom: 2px;
+    margin-bottom: 14px;
 }
 
 #sidebar-location i {
@@ -313,7 +313,7 @@ section > div {
     font-size: 0.9em;
     line-height: 1.8;
     color: var(--secondary);
-    margin-bottom: 14px;
+    margin-bottom: 2px;
 }
 
 /* 소셜 아이콘 줄 (Scholar / LinkedIn / GitHub / CV / 다크모드 토글) */
