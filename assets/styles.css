@@ -528,18 +528,28 @@ section > div {
 }
 
 /* ==========================================================================
-   Publications
-   구조: .pub-id (태그 배지) + .pub-title (제목) + .pub-authors (저자)
-         + .pub-venue (학회/저널 줄) + .pub-links (버튼, 특허는 없음)
+   Publications (학회+저널 통합, 연도별) / Patents (별도 섹션, 같은 항목 스타일 공유)
+   구조: .pub-year (연도 헤더) → .pub-id (태그 배지) + .pub-title (제목)
+         + .pub-authors (저자) + .pub-venue (학회/저널 줄) + .pub-links (버튼, 특허는 없음)
    ========================================================================== */
 
-/* 소제목(International Journals 등) 위 간격 */
-#publications ul + h3 {
-    margin-top: 20px;
+/* 목록 안 연도 헤더 — 태그(.pub-id) 왼쪽 선에 맞춰 정렬 */
+.pub-year {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1em;             /* News 타임라인 연도와 같은 크기·색 */
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: var(--emphasis);
+    margin: 18px 0 4px;
+}
+
+.pub-year:first-child {
+    margin-top: 0;
 }
 
 /* 논문·특허 항목 — 태그가 왼쪽에 걸리는 hanging indent */
-#publications .sparse-list {
+#publications .sparse-list,
+#patents .sparse-list {
     position: relative;
     padding: 12px 12px 12px 58px;   /* 왼쪽 58px = 태그 자리 */
     margin-left: -10px;             /* 태그를 컬럼 라인에 맞추기 위한 보정 */
@@ -550,7 +560,8 @@ section > div {
 
 /* 항목 호버 하이라이트 (반투명 코발트 틴트) */
 @media (hover: hover) {
-    #publications .sparse-list:hover {
+    #publications .sparse-list:hover,
+    #patents .sparse-list:hover {
         background-color: var(--hover-tint);
     }
 }
@@ -574,11 +585,32 @@ section > div {
     font-weight: 500;
 }
 
-/* 논문 태그 배지 (C6 / J9 / P7) — 종류 구분 없이 파랑으로 통일 */
-.pub-id {
-    position: absolute;
-    left: 10px;
-    top: 12px;                  /* 제목 첫 줄과 세로 중심 정렬 — 박스 padding-top과 맞춤 */
+/* Publications 제목(h2) + 오른쪽 C/J 범례 */
+.pub-heading {
+    display: flex;
+    flex-wrap: wrap;            /* 좁은 화면에서는 범례가 제목 아래 줄로 내려감 */
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px 16px;
+}
+
+.pub-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: calc(0.75em / 1.3);  /* h2(1.3em) 안이라 나눠서 본문 기준 0.75em = 태그(.pub-id)와 같은 크기 */
+    font-weight: 400;
+    color: var(--soft);
+}
+
+.pub-legend-tag {
+    margin-right: 5px;
+}
+
+/* 논문 태그 배지 (C6 / J9 / P7) — 종류 구분 없이 파랑으로 통일. 범례 태그도 같은 모양 */
+.pub-id,
+.pub-legend-tag {
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.75em;
     font-weight: 500;
@@ -591,6 +623,18 @@ section > div {
     text-align: center;
     min-width: 20px;
     box-sizing: border-box;
+}
+
+.pub-legend-tag {
+    display: inline-block;
+    font-size: 1em;             /* 범례 글자(0.75em)와 같은 크기 */
+    padding: 1px 6px;
+}
+
+.pub-id {
+    position: absolute;
+    left: 10px;
+    top: 12px;                  /* 제목 첫 줄과 세로 중심 정렬 — 박스 padding-top과 맞춤 */
 }
 
 /* Paper 버튼 줄 */
