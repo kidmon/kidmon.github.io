@@ -452,7 +452,7 @@ section > div {
 .new-badge {
     display: inline-block;
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.75em;
+    font-size: 0.8em;
     font-weight: 500;
     letter-spacing: 0.3px;
     color: var(--accent);
@@ -586,33 +586,33 @@ section > div {
 }
 
 /* Publications 제목(h2) + 오른쪽 C/J 범례 */
-.pub-heading {
-    display: flex;
-    flex-wrap: wrap;            /* 좁은 화면에서는 범례가 제목 아래 줄로 내려감 */
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 6px 16px;
-}
-
+/* 범례 — 제목 밑줄 아래 왼쪽 정렬 */
 .pub-legend {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 20px;
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: calc(0.75em / 1.3);  /* h2(1.3em) 안이라 나눠서 본문 기준 0.75em = 태그(.pub-id)와 같은 크기 */
+    font-size: 0.8em;
     font-weight: 400;
     color: var(--soft);
+    margin-top: -8px;           /* h2 아래 여백(20px)을 살짝 당겨 밑줄에 붙임 */
+}
+
+/* 그룹(태그+글자)도 세로 가운데 정렬 — 베이스라인 정렬로 태그 상자가 떠 보이는 것 방지 */
+.pub-legend > span {
+    display: inline-flex;
+    align-items: center;
 }
 
 .pub-legend-tag {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 /* 논문 태그 배지 (C6 / J9 / P7) — 종류 구분 없이 파랑으로 통일. 범례 태그도 같은 모양 */
 .pub-id,
 .pub-legend-tag {
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.75em;
+    font-size: 0.8em;
     font-weight: 500;
     line-height: 1.4;
     color: var(--primary);
@@ -627,7 +627,7 @@ section > div {
 
 .pub-legend-tag {
     display: inline-block;
-    font-size: 1em;             /* 범례 글자(0.75em)와 같은 크기 */
+    font-size: 0.8rem;          /* 범례 글자 크기와 무관하게 태그(.pub-id) 크기 고정 */
     padding: 1px 6px;
 }
 
@@ -659,7 +659,7 @@ section > div {
     background: var(--btn-bg);
     color: var(--emphasis);
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.75em;          /* 태그(.pub-id)·New 배지와 같은 크기 */
+    font-size: 0.8em;           /* 태그(.pub-id)·New 배지와 같은 크기 */
     font-weight: 500;
     line-height: 1;
     transition: all 0.2s ease;
@@ -684,7 +684,7 @@ section > div {
     padding-top: 16px;
     border-top: 1px solid var(--line);
     font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.75em;
+    font-size: 0.8em;
     color: var(--soft);
 }
 
