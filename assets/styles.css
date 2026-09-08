@@ -540,7 +540,7 @@ section > div {
     font-weight: 500;
     letter-spacing: 0.3px;
     color: var(--emphasis);
-    margin: 18px 0 4px;
+    margin: 18px 0 8px;
 }
 
 .pub-year:first-child {
@@ -595,7 +595,7 @@ section > div {
     font-size: 0.8em;
     font-weight: 400;
     color: var(--soft);
-    margin-top: -8px;           /* h2 아래 여백(20px)을 살짝 당겨 밑줄에 붙임 */
+    margin-top: -5px;           /* h2 아래 여백(20px)을 살짝 당겨 밑줄에 붙임 */
 }
 
 /* 그룹(태그+글자)도 세로 가운데 정렬 — 베이스라인 정렬로 태그 상자가 떠 보이는 것 방지 */
